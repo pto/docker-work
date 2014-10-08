@@ -1,10 +1,13 @@
-FROM centos
+FROM debian:latest
 MAINTAINER Peter Olsen "polsen@gannett.com"
 
-ENV YUM_UPDATED "2014-10-08"
+ENV APT_GET_UPDATED "2014-10-08"
 
-RUN yum -y -q update && \
-    yum -y -q install man mlocate net-tools vim && \
-    updatedb
+RUN apt-get -yqq update && \
+    apt-get -yqq upgrade 
+
+RUN apt-get -yqq install apt-file dnsutils man-db mlocate net-tools vim && \
+    updatedb && \
+    apt-file update
 
 CMD ["/bin/bash"]
