@@ -26,4 +26,6 @@ COPY vimrc /root/.vimrc
 COPY bashrc /root/bashrc
 RUN cat /root/bashrc >>/root/.bashrc && rm /root/bashrc
 
+RUN apt-get -yqq install procps
+
 CMD ["/bin/bash"]
