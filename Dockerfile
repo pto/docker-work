@@ -7,8 +7,22 @@ RUN apt-get -yqq update && \
     apt-get -yqq upgrade 
 
 RUN apt-get -yqq install apt-file build-essential dnsutils man-db \
-                         mlocate net-tools vim && \
+                         mercurial mlocate net-tools vim wget && \
     updatedb && \
     apt-file update
+
+WORKDIR /usr/local
+RUN wget https://storage.googleapis.com/golang/go1.3.3.src.tar.gz && \
+	tar xfz go1.3.3.src.tar.gz
+WORKDIR go/src
+RUN ./make.bash && rm ../../go1.3.3.src.tar.gz
+WORKDIR /root
+ENV GOROOT /usr/local/go
+ENV GOPATH /root/go
+RUN /usr/local/go/bin/go get code.google.com/p/go.tools/cmd/godoc
+
+COPY vimrc /root/.vimrc
+COPY bashrc /root/bashrc
+RUN cat /root/bashrc >>/root/.bashrc && rm /root/bashrc
 
 CMD ["/bin/bash"]
