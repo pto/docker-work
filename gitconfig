@@ -1,0 +1,5 @@
+[user]
+	name = Peter Olsen
+	email = pto@me.com
+[push]
+	default = matching

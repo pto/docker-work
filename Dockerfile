@@ -1,12 +1,12 @@
 FROM debian:latest
 MAINTAINER Peter Olsen "polsen@gannett.com"
 
-ENV APT_GET_UPDATED "2014-10-09"
+ENV APT_GET_UPDATED "2014-10-11"
 
 RUN apt-get -yqq update && \
     apt-get -yqq upgrade 
 
-RUN apt-get -yqq install apt-file build-essential dnsutils man-db \
+RUN apt-get -yqq install apt-file build-essential dnsutils git man-db \
                          mercurial mlocate net-tools vim wget && \
     updatedb && \
     apt-file update
@@ -21,6 +21,7 @@ ENV GOROOT /usr/local/go
 ENV GOPATH /root/go
 RUN /usr/local/go/bin/go get code.google.com/p/go.tools/cmd/godoc
 
+COPY gitconfig /root/.gitconfig
 COPY vimrc /root/.vimrc
 COPY bashrc /root/bashrc
 RUN cat /root/bashrc >>/root/.bashrc && rm /root/bashrc
