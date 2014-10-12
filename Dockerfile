@@ -27,3 +27,5 @@ COPY bashrc /root/bashrc
 RUN cat /root/bashrc >>/root/.bashrc && rm /root/bashrc
 
 CMD ["/bin/bash"]
+
+RUN apt-get -yqq install libcap-dev
