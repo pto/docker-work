@@ -1,7 +1,7 @@
 FROM debian:jessie
 MAINTAINER Peter Olsen "polsen@gannett.com"
 
-ENV APT_GET_UPDATED "2014-10-11"
+ENV APT_GET_UPDATED "2014-10-18"
 
 RUN apt-get -yqq update && \
     apt-get -yqq upgrade 
@@ -27,5 +27,3 @@ COPY bashrc /root/bashrc
 RUN cat /root/bashrc >>/root/.bashrc && rm /root/bashrc
 
 CMD ["/bin/bash"]
-
-RUN apt-get -yqq install libcap-dev
