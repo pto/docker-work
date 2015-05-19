@@ -11,15 +11,6 @@ RUN apt-get -y update && \
 
 COPY root/ /root/
 
-RUN cat <<EOF >>/root/.bashrc
-alias grep="grep --color=auto"
-alias ls="ls --color=auto"
-EOF
-
-ENV LC_CTYPE=C.UTF-8
-ENV PS1="\[\033[01;35m\]docker\[\033[01;34m\] \w \$\[\033[00m\] "
-ENV TZ='America/New_York'
-
 CMD ["/bin/bash"]
 
 ENV UPDATED 2015-05-19
