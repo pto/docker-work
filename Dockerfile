@@ -1,13 +1,14 @@
-FROM base/archlinux
-MAINTAINER Peter Olsen "polsen@gannett.com"
+FROM golang:1.6.2-alpine
+MAINTAINER Peter Olsen "pto@me.com"
 
-RUN pacman-key --populate archlinux && \
-    pacman-key --refresh-keys && \
-    pacman -Syu --noconfirm
-
-RUN pacman-db-upgrade && \
-    pacman -S --noconfirm base-devel bc gdb git lsof mlocate unzip vim wget && \
-    updatedb 
+#RUN pacman-key --populate archlinux && \
+#    pacman-key --refresh-keys && \
+#    pacman -Syu --noconfirm
+#
+#RUN pacman-db-upgrade && \
+#    pacman -S --noconfirm base-devel bc gdb git lsof man-db mlocate \
+#						  unzip vim wget && \
+#    updatedb 
 
 #apt-get -y update && \
 #    apt-get -y dist-upgrade && \
@@ -17,8 +18,8 @@ RUN pacman-db-upgrade && \
 #    updatedb && \
 #    mandb
 
+RUN apk add --update bash man man-pages
+
 COPY root/ /root/
 
 CMD ["/bin/bash"]
-
-ENV UPDATED 2015-07-06

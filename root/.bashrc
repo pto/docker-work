@@ -1,2 +1,2 @@
 # Custom bash prompt via kirsle.net/wizards/ps1.html
-export PS1="\[$(tput bold)\]\[$(tput setaf 4)\]\u@\h \[$(tput setaf 6)\]\W \\$ \[$(tput sgr0)\]"
+export PS1="\[\033[1m\]\[\033[34m\]\u@\h \[\033[36m\]\W \\$ \[\033(B\033[m\]"
