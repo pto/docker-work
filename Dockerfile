@@ -30,4 +30,7 @@ ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 
 COPY root/ /root/
 
+RUN mkdir /root/.vim && \
+	git clone https://github.com/fatih/vim-go.git /root/.vim/vim-go
+
 CMD ["/bin/bash"]
