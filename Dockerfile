@@ -1,4 +1,4 @@
-FROM golang:1.6.2-alpine
+FROM ubuntu:latest
 MAINTAINER Peter Olsen "pto@me.com"
 
 #RUN pacman-key --populate archlinux && \
@@ -10,15 +10,23 @@ MAINTAINER Peter Olsen "pto@me.com"
 #						  unzip vim wget && \
 #    updatedb 
 
-#apt-get -y update && \
-#    apt-get -y dist-upgrade && \
-#    apt-get -y install dc dnsutils gdb gcc git glibc-doc libc6-dev make \
-#                       man-db mlocate net-tools vim wget && \
-#    apt-get clean && \
-#    updatedb && \
-#    mandb
+RUN apt-get -y update && apt-get -y dist-upgrade && \
+	apt-get install -y autoconf automake bison build-essential \
+		curl dc dnsutils flex gdb git libc6-dev libtool make man-db \
+		mlocate net-tools vim wget && \
+	apt-get clean && updatedb && mandb
 
-RUN apk add --update bash man man-pages
+ENV GOLANG_VERSION 1.6.2
+ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz
+ENV GOLANG_DOWNLOAD_SHA256 e40c36ae71756198478624ed1bb4ce17597b3c19d243f3f0899bb5740d56212a
+
+RUN curl -L "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
+	&& echo "$GOLANG_DOWNLOAD_SHA256  golang.tar.gz" | sha256sum -c - \
+	&& tar -C /usr/local -xzf golang.tar.gz \
+	&& rm golang.tar.gz
+
+ENV GOPATH /root/go
+ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 
 COPY root/ /root/
 
