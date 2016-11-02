@@ -12,8 +12,8 @@ MAINTAINER Peter Olsen "pto@me.com"
 
 RUN apt-get -y update && apt-get -y dist-upgrade && \
 	apt-get install -y autoconf automake bison build-essential \
-		curl dc dnsutils flex gdb git libc6-dev libtool make man-db \
-		mlocate net-tools vim wget && \
+		clang curl dc dnsutils flex gdb git libc6-dev libicu-dev libtool \
+		make man-db mlocate net-tools python-dev vim wget && \
 	apt-get clean && updatedb && mandb
 
 ENV GOLANG_VERSION 1.7.3
@@ -34,3 +34,5 @@ RUN mkdir /root/.vim && \
 	git clone https://github.com/fatih/vim-go.git /root/.vim/vim-go
 
 CMD ["/bin/bash"]
+
+RUN apt-get -y update && apt-get -y dist-upgrade
