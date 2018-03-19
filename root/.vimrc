@@ -4,4 +4,5 @@ set shiftwidth=4
 set expandtab
 set ruler
 filetype plugin indent on
-syntax industry
+syntax on
+colorscheme industry

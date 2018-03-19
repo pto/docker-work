@@ -33,12 +33,14 @@ COPY root/ /root/
 #RUN mkdir /root/.vim && \
 #	git clone https://github.com/fatih/vim-go.git /root/.vim/vim-go
 
-#CMD ["/bin/bash"]
-CMD ["/bin/ash"]
-ENV ENV=/root/.ashrc
+CMD ["/bin/bash"]
+ENV ENV=/root/.bashrc
 ENV PAGER=less
 
 #RUN apt-get -y update && apt-get -y dist-upgrade
 RUN apk update && apk upgrade
-RUN apk add binutils binutils-doc build-base curl curl-doc less less-doc \
-            man man-pages mdocml-apropos gcc gcc-doc vim vim-doc 
+#RUN apk add binutils binutils-doc build-base curl curl-doc less less-doc \
+#            man man-pages mdocml-apropos gcc gcc-doc vim vim-doc 
+RUN apk add bash bash-doc binutils binutils-doc build-base ca-certificates curl curl-doc \
+        less less-doc man man-pages mdocml-apropos gcc gcc-doc go go-doc \
+        nasm nasm-doc vim vim-doc
